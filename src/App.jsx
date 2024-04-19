@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import React, { useState } from "react";
 
-function App() {
-    const [count, setCount] = useState(0)
+const TodoList = () => {
+    const initialTodos = [
+        { id: 1, title: "Learn React", isChecked: false },
+        { id: 2, title: "Get some Holy Energy", isChecked: false }
+    ];
+
+    const [todos, setTodos] = useState(initialTodos);
+
+    const toggleTodo = (id) => {
+        setTodos(
+            todos.map((todo) => {
+                if (todo.id === id) {
+                    return {
+                        ...todo, // updating todo in changing state
+                        isChecked: !todo.isChecked,
+                    };
+                } else {
+                    return todo;
+                }
+            })
+        );
+    };
+
+
+
 
     return (
         <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            <section className="top">
+                <h1>My Todo app</h1>
+                <input type="text" name="text" id="text" placeholder="Learn React" />
+                <input type="submit" value="Add task" />
+            </section>
+            <hr></hr>
+            <h3>Todos</h3>
+            <section className="todos">
+                <ul>
+                    {todos.map((todo) => (
+                        // Assign a unique key to each list item 
+                        <li key={todo.id}>
+                            <input type="checkbox" name="myCheckBox" checked={todo.isChecked} onChange={() => toggleTodo(todo.id)} /> {todo.title}
+                        </li>
+                    ))}
+                </ul>
+            </section>
         </>
-    )
+
+
+    );
 }
 
-export default App
+export default TodoList
