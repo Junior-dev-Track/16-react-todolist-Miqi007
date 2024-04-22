@@ -11,6 +11,7 @@ const TodoList = () => {
 
     // State
     const [todos, setTodos] = useState(initialTodos);
+    const [newTodo, setNewTodo] = useState("");
 
     // Handle behaviour
     // Check if a todo is done
@@ -32,8 +33,24 @@ const TodoList = () => {
     // Delete a todo 
     const handleDelete = (id) => {
         setTodos(
-            todos.filter((todo) => todo.id !== id),
+            todos.filter((todo) => todo.id !== id), // delete the item based on his id
         )
+    }
+
+    //Add new todo in li
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const id = new Date().getTime(); // id unique
+        const newTodoItem = { id, title: newTodo, isChecked: false }; // define new todo item
+
+        setTodos(prevTodos => [...prevTodos, newTodoItem]); // add it on the toto list
+        setNewTodo(""); // empty input after submit
+    }
+
+
+    //Handle change in the input
+    const handleChange = (event) => {
+        setNewTodo(event.target.value) //value of the input set in the setter
     }
 
 
@@ -45,8 +62,10 @@ const TodoList = () => {
         <>
             <section className="top">
                 <h1>My Todo app</h1>
-                <input type="text" name="text" id="text" placeholder="Learn React" />
-                <input type="submit" value="Add task" />
+                <form action="submit" onSubmit={handleSubmit}>
+                    <input value={newTodo} type="text" name="text" id="text" placeholder="Learn React" onChange={handleChange} />
+                    <input onSubmit={handleSubmit} type="submit" value="Add task" />
+                </form>
             </section>
             <hr></hr>
             <h3>Todos</h3>
