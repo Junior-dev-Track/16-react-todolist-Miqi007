@@ -1,8 +1,6 @@
 import './App.css'
 import React, { useState } from "react";
 
-
-//
 const TodoList = () => {
 
     // Data
@@ -15,12 +13,13 @@ const TodoList = () => {
     const [todos, setTodos] = useState(initialTodos);
 
     // Handle behaviour
+    // Check if a todo is done
     const handleCheck = (id) => {
         setTodos(
             todos.map((todo) => {
                 if (todo.id === id) { // catch the right checkbox to update
                     return {
-                        ...todo, // updating todo in changing state
+                        ...todo, // updating todo in changing state => copy not original => immutability
                         isChecked: !todo.isChecked,
                     };
                 } else {
@@ -29,6 +28,15 @@ const TodoList = () => {
             })
         );
     };
+
+    // Delete a todo 
+    const handleDelete = (id) => {
+        setTodos(
+            todos.filter((todo) => todo.id !== id),
+        )
+    }
+
+
 
 
 
@@ -47,7 +55,9 @@ const TodoList = () => {
                     {todos.map((todo) => (
                         // Assign a unique key to each list item 
                         <li key={todo.id}>
-                            <input type="checkbox" name="myCheckBox" checked={todo.isChecked} onChange={() => handleCheck(todo.id)} /> {todo.title}
+                            <input type="checkbox" name="myCheckBox" checked={todo.isChecked} onChange={() => handleCheck(todo.id)} />
+                            {todo.title}
+                            <button onClick={() => handleDelete(todo.id)}>Delete</button>
                         </li>
                     ))}
                 </ul>
