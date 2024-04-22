@@ -17,6 +17,7 @@ const TodoList = () => {
     // Check if a todo is done
     const handleCheck = (id) => {
         setTodos(
+
             todos.map((todo) => {
                 if (todo.id === id) { // catch the right checkbox to update
                     return {
@@ -43,7 +44,7 @@ const TodoList = () => {
         const id = new Date().getTime(); // id unique
         const newTodoItem = { id, title: newTodo, isChecked: false }; // define new todo item
 
-        setTodos(prevTodos => [...prevTodos, newTodoItem]); // add it on the toto list
+        setTodos(prevTodos => [...prevTodos, newTodoItem]); // add it on the todo list
         setNewTodo(""); // empty input after submit
     }
 
@@ -75,7 +76,7 @@ const TodoList = () => {
                         // Assign a unique key to each list item 
                         <li key={todo.id}>
                             <input type="checkbox" name="myCheckBox" checked={todo.isChecked} onChange={() => handleCheck(todo.id)} />
-                            {todo.title}
+                            <span style={{ textDecoration: todo.isChecked ? 'line-through' : 'none' }}>{todo.title}</span>
                             <button onClick={() => handleDelete(todo.id)}>Delete</button>
                         </li>
                     ))}
