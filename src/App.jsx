@@ -4,6 +4,8 @@ import React, { useState } from "react";
 
 //
 const TodoList = () => {
+
+    // Data
     const initialTodos = [
         { id: 1, title: "Learn React", isChecked: false },
         { id: 2, title: "Get some Holy Energy", isChecked: false }
