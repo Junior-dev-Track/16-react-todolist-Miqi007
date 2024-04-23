@@ -2,7 +2,6 @@ import './App.css'
 import { useState } from "react";
 import Form from "./components/Form";
 import ToDoList from "./components/ToDoList";
-
 const TodoList = () => {
 
     // Data
@@ -14,6 +13,8 @@ const TodoList = () => {
     // State
     const [todos, setTodos] = useState(initialTodos);
     const [newTodo, setNewTodo] = useState("");
+
+
 
     // Handle behaviour
     // Check if a todo is done
@@ -47,7 +48,7 @@ const TodoList = () => {
         const newTodoItem = { id, title: newTodo, isChecked: false }; // define new todo item
 
         setTodos(prevTodos => [...prevTodos, newTodoItem]); // add it on the todo list
-        setNewTodo(""); // empty input after submit
+        setNewTodo(""); // Clear the input field
     }
 
 
@@ -68,8 +69,9 @@ const TodoList = () => {
                 <Form submitForm={handleSubmit} inputChange={handleChange} todosInfos={newTodo} />
             </section>
             <hr></hr>
-            <h3>Todos</h3>
+
             <section className="todos">
+                <h3>Todos</h3>
                 <ul>
                     {todos.map((todo) => (
                         <ToDoList todoInfos={todo} checkbox={handleCheck} deleteTodo={handleDelete} />

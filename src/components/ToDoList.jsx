@@ -1,7 +1,4 @@
 export default function ToDoList({ todoInfos, checkbox, deleteTodo }) {
-    //state
-
-    //behaviour
 
     //render
     return (

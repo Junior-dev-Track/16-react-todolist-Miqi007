@@ -11,6 +11,12 @@
   align-items: center;
   gap: 0.5rem;
 
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   input[type="submit"] {
     padding: 0.3rem 1rem;
     margin: 1rem 0;
@@ -34,12 +40,14 @@ hr {
 
   li {
     list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
 
     input:hover {
       cursor: pointer;
     }
   }
-
-
 
 }
