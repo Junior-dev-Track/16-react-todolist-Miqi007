@@ -38,9 +38,11 @@ const TodoList = () => {
     // Delete a todo 
     const handleDelete = (id) => {
         setTodos(
-            todos.filter((todo) => todo.id !== id),
-        )
+            todos.filter((todo) => !todo.isChecked || todo.id !== id)
+        );
     }
+
+
 
     // Add new todo in li
     const handleSubmit = (event) => {
