@@ -1,5 +1,7 @@
 import './App.css'
-import React, { useState } from "react";
+import { useState } from "react";
+import Form from "./components/Form";
+import ToDoList from "./components/ToDoList";
 
 const TodoList = () => {
 
@@ -63,22 +65,14 @@ const TodoList = () => {
         <>
             <section className="top">
                 <h1>My Todo app</h1>
-                <form action="submit" onSubmit={handleSubmit}>
-                    <input value={newTodo} type="text" name="text" id="text" placeholder="Learn React" onChange={handleChange} />
-                    <input onSubmit={handleSubmit} type="submit" value="Add task" />
-                </form>
+                <Form submitForm={handleSubmit} inputChange={handleChange} todosInfos={newTodo} />
             </section>
             <hr></hr>
             <h3>Todos</h3>
             <section className="todos">
                 <ul>
                     {todos.map((todo) => (
-                        // Assign a unique key to each list item 
-                        <li key={todo.id}>
-                            <input type="checkbox" name="myCheckBox" checked={todo.isChecked} onChange={() => handleCheck(todo.id)} />
-                            <span style={{ textDecoration: todo.isChecked ? 'line-through' : 'none' }}>{todo.title}</span>
-                            <button onClick={() => handleDelete(todo.id)}>Delete</button>
-                        </li>
+                        <ToDoList todoInfos={todo} checkbox={handleCheck} deleteTodo={handleDelete} />
                     ))}
                 </ul>
             </section>
