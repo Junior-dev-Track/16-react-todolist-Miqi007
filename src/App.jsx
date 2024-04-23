@@ -1,18 +1,20 @@
-import './App.css'
-import { useState } from "react";
+import './App.css';
+import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import ToDoList from "./components/ToDoList";
+
+const LSKEY = "MyTodoApp";
+
+
 const TodoList = () => {
 
-    // Data
-    const initialTodos = [
-        { id: 1, title: "Learn React", isChecked: false },
-        { id: 2, title: "Get some Holy Energy", isChecked: false }
-    ];
+    // Retrieve todos from localStorage on component mount
+    const storedTodos = window.localStorage.getItem(LSKEY + ".todos");
+    const parsedTodos = storedTodos ? JSON.parse(storedTodos) : [];
 
     // State
-    const [todos, setTodos] = useState(initialTodos);
     const [newTodo, setNewTodo] = useState("");
+    const [todos, setTodos] = useState(parsedTodos);
 
 
 
@@ -20,11 +22,10 @@ const TodoList = () => {
     // Check if a todo is done
     const handleCheck = (id) => {
         setTodos(
-
             todos.map((todo) => {
-                if (todo.id === id) { // catch the right checkbox to update
+                if (todo.id === id) {
                     return {
-                        ...todo, // updating todo in changing state => copy not original => immutability
+                        ...todo,
                         isChecked: !todo.isChecked,
                     };
                 } else {
@@ -37,27 +38,28 @@ const TodoList = () => {
     // Delete a todo 
     const handleDelete = (id) => {
         setTodos(
-            todos.filter((todo) => todo.id !== id), // delete the item based on his id
+            todos.filter((todo) => todo.id !== id),
         )
     }
 
-    //Add new todo in li
+    // Add new todo in li
     const handleSubmit = (event) => {
         event.preventDefault();
-        const id = new Date().getTime(); // id unique
-        const newTodoItem = { id, title: newTodo, isChecked: false }; // define new todo item
+        const id = new Date().getTime();
+        const newTodoItem = { id, title: newTodo, isChecked: false };
 
-        setTodos(prevTodos => [...prevTodos, newTodoItem]); // add it on the todo list
-        setNewTodo(""); // Clear the input field
+        setTodos(prevTodos => [...prevTodos, newTodoItem]);
+        setNewTodo("");
     }
 
-
-    //Handle change in the input
+    // Handle change in the input
     const handleChange = (event) => {
-        setNewTodo(event.target.value) //value of the input set in the setter
+        setNewTodo(event.target.value)
     }
 
-
+    useEffect(() => {
+        window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
+    }, [todos]); // Run this effect only when todos change
 
 
 
@@ -79,9 +81,8 @@ const TodoList = () => {
                 </ul>
             </section>
         </>
-
-
     );
+
 }
 
-export default TodoList
+export default TodoList;
