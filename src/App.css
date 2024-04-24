@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
 #root {
   max-width: 1110px;
   margin: 0 auto;
@@ -10,6 +12,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  font-family: 'Titillium Web';
 
   form {
     display: flex;
@@ -32,6 +35,7 @@
   input[type="submit"] {
     padding: 0.3rem 1rem;
     margin: 1rem 0;
+    font-family: 'Titillium Web';
 
     &:hover {
       cursor: pointer;
@@ -55,6 +59,7 @@ hr {
   flex-direction: column;
   align-items: center;
   text-align: left;
+  font-family: 'Titillium Web';
 
   li {
     list-style-type: none;
@@ -67,7 +72,11 @@ hr {
       cursor: pointer;
     }
 
-    /* Checkbox style */
+    button {
+      font-family: 'Titillium Web';
+    }
+
+    /* Checkbox style ----------------------------------------*/
     .custom-checkbox {
       display: inline-flex;
       align-items: center;
@@ -82,8 +91,8 @@ hr {
     }
 
     .custom-checkbox .checkmark {
-      width: 15px;
-      height: 15px;
+      width: 12px;
+      height: 12px;
       border: 2px solid #333;
       border-radius: 4px;
       display: flex;
