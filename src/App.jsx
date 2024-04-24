@@ -18,7 +18,6 @@ const TodoList = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
 
-
     // Handle behaviour
     // Check if a todo is done
     const handleCheck = (id) => {
@@ -76,11 +75,21 @@ const TodoList = () => {
         setNewTodo(event.target.value)
     }
 
+    // Save item in localstorage
     useEffect(() => {
         window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
     }, [todos]); // Run this effect only when todos change
 
-
+    const setUpdate = (updatedTitle, id) => {
+        setTodos(
+            todos.map((todo) => {
+                if (todo.id === id) {
+                    todo.title = updatedTitle;
+                }
+                return todo;
+            })
+        );
+    };
 
     // Render
     return (
@@ -96,7 +105,7 @@ const TodoList = () => {
                 <h3>Todos</h3>
                 <ul>
                     {todos.map((todo) => (
-                        <ToDoList todoInfos={todo} checkbox={handleCheck} deleteTodo={handleDelete} />
+                        <ToDoList todoInfos={todo} checkbox={handleCheck} deleteTodo={handleDelete} setUpdate={setUpdate} />
                     ))}
                 </ul>
             </section>

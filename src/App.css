@@ -58,13 +58,20 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: left;
+  justify-content: center;
   font-family: 'Titillium Web';
 
-  li {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li,
+  .view {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     padding: 0.5rem 0;
 
@@ -74,6 +81,13 @@ hr {
 
     button {
       font-family: 'Titillium Web';
+    }
+
+    .textInput {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #dfdfdf;
+      outline: none;
     }
 
     /* Checkbox style ----------------------------------------*/
