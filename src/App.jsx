@@ -15,6 +15,7 @@ const TodoList = () => {
     // State
     const [newTodo, setNewTodo] = useState("");
     const [todos, setTodos] = useState(parsedTodos);
+    const [errorMessage, setErrorMessage] = useState('');
 
 
 
@@ -37,10 +38,21 @@ const TodoList = () => {
 
     // Delete a todo 
     const handleDelete = (id) => {
-        setTodos(
-            todos.filter((todo) => !todo.isChecked || todo.id !== id)
-        );
-    }
+        // First, find the todo item with the specified id
+        const todoToDelete = todos.find(todo => todo.id === id);
+
+        // Check if the todo item exists and if it's checked
+        if (todoToDelete && !todoToDelete.isChecked) {
+            setErrorMessage("Task not completed ❌");
+        } else {
+            // If the todo item doesn't exist or is checked, filter it out
+            const updatedTodos = todos.filter(todo => todo.id !== id);
+            setTodos(updatedTodos);
+            setErrorMessage("");
+        }
+    };
+
+
 
 
 
@@ -49,9 +61,14 @@ const TodoList = () => {
         event.preventDefault();
         const id = new Date().getTime();
         const newTodoItem = { id, title: newTodo, isChecked: false };
+        if (newTodoItem.title != "") {
+            setTodos(prevTodos => [...prevTodos, newTodoItem]);
+            setNewTodo("");
+            setErrorMessage("");
+        } else {
+            setErrorMessage('Empty task not allowed ⛔');
 
-        setTodos(prevTodos => [...prevTodos, newTodoItem]);
-        setNewTodo("");
+        }
     }
 
     // Handle change in the input
@@ -71,6 +88,7 @@ const TodoList = () => {
             <section className="top">
                 <h1>My Todo app</h1>
                 <Form submitForm={handleSubmit} inputChange={handleChange} todosInfos={newTodo} />
+                {errorMessage && <div className="error"> {errorMessage} </div>}
             </section>
             <hr></hr>
 
