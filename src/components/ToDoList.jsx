@@ -3,7 +3,7 @@ export default function ToDoList({ todoInfos, checkbox, deleteTodo }) {
     //render
     return (
         <li key={todoInfos.id} >
-            <label class="custom-checkbox">
+            <label className="custom-checkbox">
                 <input type="checkbox" name="myCheckBox" checked={todoInfos.isChecked} onChange={() => checkbox(todoInfos.id)} />
                 <span className="checkmark"></span>
             </label>
